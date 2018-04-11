@@ -1,0 +1,8 @@
+.paper {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.paper span{
+  padding-left: 25px;
+}

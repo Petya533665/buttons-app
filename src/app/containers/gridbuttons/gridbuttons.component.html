@@ -1,0 +1,19 @@
+<div class="preview grid-button">
+  <span *ngFor="let button of buttons" ngStyle="button"
+        [ngStyle]="button"
+        [style.paddingBottom]="button.paddingBottom"
+        [style.paddingTop]="button.paddingTop"
+        [style.paddingLeft]="button.paddingLeft"
+        [style.paddingRight]="button.paddingRight"
+        [style.borderRadius]="button.borderRadius"
+        [style.boxShadow]="button.boxShadow"
+        [style.fontFamily]="button.fontFamily"
+        [style.fontSize]="button.fontSize"
+        [style.textShadow]="button.textShadow"
+        [style.fontWeight]="button.fontWeight"
+        [ngClass]="button.class"
+        (click)="buttonService.updateButton(button)"
+  >
+  {{button.textValue}}
+  </span>
+</div>

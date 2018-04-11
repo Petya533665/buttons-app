@@ -1,0 +1,28 @@
+
+.preview, a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffffff;
+}
+
+a:active {
+  color: #ffffff;
+}
+
+a:visited {
+  color: #ffffff;
+}
+
+a:link {
+  color: #ffffff;
+}
+
+a:focus {
+  color: #ffffff;
+}
+

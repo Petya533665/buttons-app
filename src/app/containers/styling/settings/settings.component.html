@@ -1,0 +1,398 @@
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Class name: {{button.class}}
+      </mat-panel-title>
+      <mat-icon>title</mat-icon>
+
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <input type="text" matInput (change)="updateButton(button)" [(ngModel)]="button.class">
+    </mat-form-field>
+
+    <mat-action-row>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Size
+      </mat-panel-title>
+      <mat-icon>fullscreen</mat-icon>
+
+    </mat-expansion-panel-header>
+    <span>width: {{button.width}}px
+    <mat-slider
+      (change)="updateButton(button)"
+      thumbLabel
+      tickInterval="1"
+      min="11"
+      max="200"
+      step="1"
+      [(ngModel)]="button.width"
+    >
+    </mat-slider>
+    </span><br>
+    <span>height: {{button.height}}px
+    <mat-slider
+      (change)="updateButton(button)"
+      thumbLabel
+      tickInterval="1"
+      min="11"
+      max="200"
+      step="1"
+      [(ngModel)]="button.height"
+    >
+    </mat-slider>
+      </span>
+    <mat-divider></mat-divider>
+    <span *ngIf="!button.customePadding">padding: {{button.padding}}px</span>
+    <span *ngIf="button.customePadding">padding: {{button.paddingTop}}px {{button.paddingRight}}px {{button.paddingBottom}}px {{button.paddingLeft}}px</span>
+    <br>
+    <div *ngIf="!button.customePadding">
+      <mat-slider
+        (change)="updateButton(button)"
+        thumbLabel
+        tickInterval="1"
+        min="0"
+        max="100"
+        step="1"
+        [(ngModel)]="button.padding"
+      >
+
+      </mat-slider>
+    </div>
+    <mat-checkbox *ngIf="!button.customePadding" (change)="updateButton(button)" [(ngModel)]="button.customePadding">
+      Custome padding...
+    </mat-checkbox>
+    <div *ngIf="button.customePadding" class="settings">
+      <span>Padding-top: {{button.paddingTop}}px</span>
+      <mat-slider
+        (change)="updateButton(button)"
+        thumbLabel
+        tickInterval="1"
+        min="0"
+        max="100"
+        step="1"
+        [(ngModel)]="button.paddingTop"
+      >
+
+      </mat-slider>
+      <span>Padding-left: {{button.paddingLeft}}px</span>
+      <mat-slider
+        (change)="updateButton(button)"
+        thumbLabel
+        tickInterval="1"
+        min="0"
+        max="100"
+        step="1"
+        [(ngModel)]="button.paddingLeft"
+      >
+
+      </mat-slider>
+      <span>Padding-right: {{button.paddingRight}}px</span>
+      <mat-slider
+        (change)="updateButton(button)"
+        thumbLabel
+        tickInterval="1"
+        min="0"
+        max="100"
+        step="1"
+        [(ngModel)]="button.paddingRight"
+      >
+
+      </mat-slider>
+      <span>Padding-bottom: {{button.paddingBottom}}px</span>
+      <mat-slider
+        (change)="updateButton(button)"
+        thumbLabel
+        tickInterval="1"
+        min="0"
+        max="100"
+        step="1"
+        [(ngModel)]="button.paddingBottom"
+      >
+
+      </mat-slider>
+    </div>
+
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Background, border, shadow
+      </mat-panel-title>
+      <mat-icon>brush</mat-icon>
+
+    </mat-expansion-panel-header>
+
+    <mat-checkbox (change)="updateButton(button)" [(ngModel)]="button.backgroundGradient">
+      Mode gradient
+    </mat-checkbox>
+    <mat-form-field *ngIf="!button.backgroundGradient">
+      <input matInput (blur)="updateButton(button)" [(colorPicker)]="button.background"
+             [cpPosition]="'bottom'"
+             [cpOutputFormat]="'rgba'" [(ngModel)]="button.background"/>
+    </mat-form-field>
+    <span *ngIf="button.backgroundGradient"><br>From:
+    <mat-form-field>
+      <input matInput (blur)="updateButton(button)" [(colorPicker)]="button.backgroundStartColor"
+             [cpPosition]="'bottom'"
+             [cpOutputFormat]="'rgba'" [(ngModel)]="button.backgroundStartColor"/>
+    </mat-form-field>
+      </span>
+    <span *ngIf="button.backgroundGradient"><br>To:
+    <mat-form-field>
+      <input matInput (blur)="updateButton(button)" [(colorPicker)]="button.backgroundEndColor"
+             [cpPosition]="'bottom'"
+             [cpOutputFormat]="'rgba'" [(ngModel)]="button.backgroundEndColor"/>
+    </mat-form-field></span>
+    <span *ngIf="button.backgroundGradient" style="display: flex;">
+    gradient to:
+    <mat-select placeholder="Unit" [(ngModel)]="button.gradientTo" (change)="updateButton(button)">
+    <mat-option *ngFor="let gradientTo of button.gradientToList" [(value)]="gradientTo.viewValue">
+      {{ gradientTo.viewValue }}
+    </mat-option>
+  </mat-select>
+  </span>
+    <mat-divider></mat-divider>
+    <mat-checkbox (change)="updateButton(button)" [(ngModel)]="button.boxShadowTrue">
+      Box shadow
+    </mat-checkbox>
+    <div *ngIf="button.boxShadowTrue">
+      <span>Horizontal Length
+      <mat-slider
+        (change)="updateButton(button)"
+        thumbLabel
+        tickInterval="1"
+        min="-200"
+        max="200"
+        step="1"
+        [(ngModel)]="button.boxShadowX"
+      >
+
+      </mat-slider>
+        </span><br>
+      <span>Vertical Length
+      <mat-slider
+        (change)="updateButton(button)"
+        thumbLabel
+        tickInterval="1"
+        min="-200"
+        max="200"
+        step="1"
+        [(ngModel)]="button.boxShadowY"
+      >
+
+      </mat-slider>
+        </span><br>
+      <span>Blur Radius
+      <mat-slider
+        (change)="updateButton(button)"
+        thumbLabel
+        tickInterval="1"
+        min="-200"
+        max="200"
+        step="1"
+        [(ngModel)]="button.boxShadowBlur"
+      >
+
+      </mat-slider>
+        </span><br>
+      <span>Spread Spread
+      <mat-slider
+        (change)="updateButton(button)"
+        thumbLabel
+        tickInterval="1"
+        min="-200"
+        max="200"
+        step="1"
+        [(ngModel)]="button.boxShadowSpread"
+      >
+
+      </mat-slider>
+        </span><br>
+      <span>Box shadow color:
+      <mat-form-field>
+        <input matInput (blur)="updateButton(button)" [(colorPicker)]="button.boxShadowColor"
+               [cpPosition]="'bottom'"
+               [cpOutputFormat]="'rgba'" [(ngModel)]="button.boxShadowColor"/>
+      </mat-form-field>
+</span>
+    </div>
+    <mat-divider></mat-divider>
+    <span>border-width:
+
+    <mat-slider
+      (change)="updateButton(button)"
+      thumbLabel
+      tickInterval="1"
+      min="0"
+      max="15"
+      step="1"
+      [(ngModel)]="button.borderWidth"
+    >
+    </mat-slider>
+      </span><br>
+    <span>border-radius:
+    <mat-slider
+      (change)="updateButton(button)"
+      thumbLabel
+      tickInterval="1"
+      min="0"
+      max="50"
+      step="1"
+      [(ngModel)]="button.borderRadius"
+    >
+    </mat-slider>
+      </span><br>
+
+    <span>border-color:
+    <mat-form-field>
+      <input matInput (blur)="updateButton(button)" [(colorPicker)]="button.borderColor"
+             [cpPosition]="'bottom'"
+             [cpOutputFormat]="'rgba'" [(ngModel)]="button.borderColor"/>
+    </mat-form-field></span><br>
+
+    <span style="display:flex;">border-style:
+    <mat-select placeholder="Border style" [(ngModel)]="button.borderStyle" (change)="updateButton(button)">
+    <mat-option *ngFor="let border of button.borderStyles" [(value)]="border.viewValue">
+      {{ border.viewValue }}
+    </mat-option>
+  </mat-select>
+      </span>
+    <br>
+
+    <span style="display: flex">border-unit:
+    <mat-select placeholder="Unit" [(ngModel)]="button.borderRadiusUnit" (change)="updateButton(button)">
+    <mat-option *ngFor="let border of button.borderRadiusUnits" [(value)]="border.viewValue">
+      {{ border.viewValue }}
+    </mat-option>
+  </mat-select>
+      </span>
+
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Text
+      </mat-panel-title>
+      <mat-icon>speaker_notes</mat-icon>
+
+    </mat-expansion-panel-header>
+    <span>Text: <mat-form-field>
+      <input type="text" matInput (change)="updateButton(button)" [(ngModel)]="button.textValue">
+    </mat-form-field>
+
+   </span> <br>
+    <span>Color:
+  <mat-form-field>
+    <input matInput (blur)="updateButton(button)" [(colorPicker)]="button.color"
+           [cpPosition]="'bottom'"
+           [cpOutputFormat]="'rgba'" [(ngModel)]="button.color"/>
+  </mat-form-field>
+    </span>
+    <span style="display: flex">border-unit:
+    <mat-select placeholder="Font Family" [(ngModel)]="button.fontFamily" (change)="updateButton(button)">
+    <mat-option *ngFor="let fontFamily of button.fontFamilys" [(value)]="fontFamily.viewValue">
+      {{ fontFamily.viewValue }}
+    </mat-option>
+  </mat-select>
+      </span>
+    <span>Font size: <mat-form-field>
+      <input type="number" matInput (change)="updateButton(button)" [(ngModel)]="button.fontSize">
+    </mat-form-field>
+    </span>
+
+    <span style="display: flex">Font weight:
+    <mat-select placeholder="Unit" [(ngModel)]="button.fontWeight" (change)="updateButton(button)">
+    <mat-option *ngFor="let weight of button.fontWeights" [(value)]="weight.viewValue">
+      {{ weight.viewValue }}
+    </mat-option>
+  </mat-select>
+      </span>
+    <mat-checkbox (change)="updateButton(button)" [(ngModel)]="button.textShadowTrue">
+      Text shadow
+    </mat-checkbox>
+    <div *ngIf="button.textShadowTrue">
+      <span>Horizontal Length
+      <mat-slider
+        (change)="updateButton(button)"
+        thumbLabel
+        tickInterval="1"
+        min="-200"
+        max="200"
+        step="1"
+        [(ngModel)]="button.textShadowX"
+      >
+
+      </mat-slider>
+        </span><br>
+      <span>Vertical Length
+      <mat-slider
+        (change)="updateButton(button)"
+        thumbLabel
+        tickInterval="1"
+        min="-200"
+        max="200"
+        step="1"
+        [(ngModel)]="button.textShadowY"
+      >
+
+      </mat-slider>
+        </span><br>
+      <span>Blur Radius
+      <mat-slider
+        (change)="updateButton(button)"
+        thumbLabel
+        tickInterval="1"
+        min="-200"
+        max="200"
+        step="1"
+        [(ngModel)]="button.textShadowBlur"
+      >
+
+      </mat-slider>
+</span><br>
+      <span>Text shadow color:
+      <mat-form-field>
+        <input matInput (blur)="updateButton(button)"
+               [(colorPicker)]="button.textShadowColor"
+               [cpPosition]="'bottom'"
+               [cpOutputFormat]="'rgba'" [(ngModel)]="button.textShadowColor"/>
+      </mat-form-field>
+</span>
+    </div>
+
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">End</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+
+</mat-accordion>
+
+
+<div class="settings">
+
+
+</div>

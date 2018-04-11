@@ -1,0 +1,29 @@
+<h2 class="title">
+  Result:
+</h2>
+
+<div class="paper preview">
+
+  .{{button.class}} {{ '{' }}
+  <span>display: flex;</span>
+  <span>justify-content: center;</span>
+  <span>align-items: center;</span>
+  <span>text-decoration: none;</span>
+  <span>width: {{button.width}}px;</span>
+  <span>height: {{button.height}}px;</span>
+  <span *ngIf="!button.customePadding">padding: {{button.padding}}px;</span>
+  <span *ngIf="button.customePadding">padding: {{button.paddingTop}}px {{button.paddingRight}}px {{button.paddingBottom}}px {{button.paddingLeft}}px;</span>
+  <span>font-family: {{button.fontFamily}};</span>
+  <span>font-weight: {{button.fontWeight}};</span>
+  <span>font-size: {{button.fontSize}}px;</span>
+  <span *ngIf="!button.textShadowTrue">text-shadow: {{button.textShadow}};</span>
+  <span>background: {{button.background}};</span>
+  <span *ngIf="button.backgroundGradient">background: -webkit-{{button.background}};</span>
+  <span *ngIf="button.backgroundGradient">background: -o-{{button.background}};</span>
+  <span *ngIf="button.boxShadowTrue">box-shadow: {{button.boxShadow}};</span>
+  <span>-webkit-border-radius: {{button.borderRadius}}{{button.borderRadiusUnit}};</span>
+  <span>border-radius: {{button.borderRadius}}{{button.borderRadiusUnit}};</span>
+  <span>border: {{button.borderWidth}}px {{button.borderStyle}} {{button.borderColor}};</span>
+  <span>color: {{button.color}};</span>
+  }
+</div>
