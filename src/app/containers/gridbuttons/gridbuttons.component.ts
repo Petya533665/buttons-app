@@ -16,7 +16,6 @@ export class GridbuttonsComponent implements OnInit {
 
   ngOnInit() {
     this.buttons = this.buttonService.getButtons();
-
   }
 
 
